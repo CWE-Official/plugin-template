@@ -2,8 +2,9 @@
 
 A **working, tested CasinoWebEngine plugin** you copy and rename. It exercises every plugin
 capability except money movement: a plugin-owned dataset, player + admin HTTP routes, a backoffice
-surface page, a nightly job, typed settings, an event, and a migration. (Provider/money plugins:
-see `plugins/sloterv` in the platform repo for the reference wallet-command flow.)
+surface page, a nightly job, typed settings, an event, and a migration. (Provider/money plugins
+additionally register a `ProviderAdapter` and move money exclusively by dispatching wallet
+commands through `ctx.commands` — contact the CWE team for the provider reference integration.)
 
 ```bash
 pnpm install
@@ -52,12 +53,11 @@ rejects (same error names/codes; the platform runs a conformance suite to guaran
 
 ## Dev loop against a real runtime
 
-```bash
-# 1. one-command local runtime (from the platform repo):
-docker compose -f docker-compose.plugindev.yml up
+You need a CWE dev runtime with the plugin dev harness enabled — ask your CWE platform contact
+for access (or the runtime URL + staff token you've been issued). Then:
 
-# 2. in this repo:
-npx @cwe-platform/plugin-cli dev     # watch → build → sideload → tail logs
+```bash
+npx @cwe-platform/plugin-cli dev       # watch → build → sideload → tail logs
 npx @cwe-platform/plugin-cli validate  # run the full plugin doctor on the runtime
 ```
 

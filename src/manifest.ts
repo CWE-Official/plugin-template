@@ -2,9 +2,9 @@ import { settingsField, type PluginManifest } from "@cwe-platform/plugin-sdk";
 import { z } from "zod";
 
 /**
- * player-favorites — a small but REAL plugin exercising every v2 capability
- * except money/provider flows (for a provider plugin, see `plugins/sloterv`
- * in the platform repo):
+ * player-favorites — a small but REAL plugin exercising every plugin
+ * capability except money/provider flows (provider plugins additionally
+ * register a ProviderAdapter and dispatch wallet commands via ctx.commands):
  *
  *  - a plugin-owned dataset (`favorites`) with indexed queries;
  *  - player-surface routes (session-bound: a player only sees their own rows);
