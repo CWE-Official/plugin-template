@@ -54,18 +54,22 @@ rejects (same error names/codes; the platform runs a conformance suite to guaran
 ## Dev loop against a real runtime
 
 You need a CWE dev runtime with the plugin dev harness enabled — ask your CWE platform contact
-for access (or the runtime URL + staff token you've been issued). Then:
+for access (runtime URL + staff credentials). Then:
 
 ```bash
+npx @cwe-platform/plugin-cli login     # staff login → saves devToken into cwe-plugin.json
 npx @cwe-platform/plugin-cli dev       # watch → build → sideload → tail logs
 npx @cwe-platform/plugin-cli validate  # run the full plugin doctor on the runtime
 ```
 
-Configure the CLI in `cwe-plugin.json`:
+Configure the CLI in `cwe-plugin.json` (`login` fills in the token):
 
 ```json
-{ "runtimeUrl": "http://localhost:3000", "pluginKey": "player-favorites", "devToken": "<staff token>" }
+{ "runtimeUrl": "http://localhost:3000", "pluginKey": "player-favorites" }
 ```
+
+Staff tokens expire after ~15 minutes; for long `dev` sessions export
+`CWE_STAFF_EMAIL` / `CWE_STAFF_PASSWORD` and the watcher re-logs-in automatically.
 
 ## Versioning & publishing
 
